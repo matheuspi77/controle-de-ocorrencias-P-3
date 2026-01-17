@@ -1,12 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>43° BPM - P/3 - Sistema de Ocorrências</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts e estilos gerais -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body {
@@ -19,45 +24,67 @@
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        /* Estilo para barra de rolagem personalizada */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #334155; }
     </style>
+
     <!-- Bibliotecas para PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
-<!-- FIREBASE -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyD7hl8nSkkHuRtEudVjW6MieJDdSBGy_wU",
-    authDomain: "controle-de-ocorrencias-p-3.firebaseapp.com",
-    projectId: "controle-de-ocorrencias-p-3",
-  };
+    <!-- FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+        // Configuração Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7hl8nSkkHuRtEudVjW6MieJDdSBGy_wU",
+            authDomain: "controle-de-ocorrencias-p-3.firebaseapp.com",
+            projectId: "controle-de-ocorrencias-p-3",
+            storageBucket: "controle-de-ocorrencias-p-3.firebasestorage.app",
+            messagingSenderId: "1074090746654",
+            appId: "1:1074090746654:web:e459b57dc391167b5b9f0f"
+        };
 
-  // 🔥 TORNA GLOBAL (ESSENCIAL)
-  window.db = db;
+        // Inicializa Firebase e Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-  console.log("Firebase inicializado OK", db);
-</script>
+        // Torna global para acessar em outros scripts
+        window.db = db;
+
+        console.log("Firebase inicializado OK", db);
+
+        // --- FUNÇÕES DE TESTE ---
+        async function salvarTeste() {
+            try {
+                const docRef = await addDoc(collection(db, "usuarios"), {
+                    nome: "João",
+                    mensagem: "Olá mundo",
+                    criadoEm: new Date()
+                });
+                console.log("Documento salvo com ID:", docRef.id);
+            } catch (e) {
+                console.error("Erro ao salvar documento:", e);
+            }
+        }
+
+        async function lerTeste() {
+            const querySnapshot = await getDocs(collection(db, "usuarios"));
+            querySnapshot.forEach((doc) => {
+                console.log(doc.id, doc.data());
+            });
+        }
+
+        // Executa os testes
+        salvarTeste();
+        lerTeste();
+    </script>
 </body>
 </html>
