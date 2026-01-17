@@ -1,0 +1,7 @@
+{
+  "name": "43° BPM - P/3 - Sistema de Ocorrências Policiais",
+  "description": "Uma plataforma avançada para registro, monitoramento e análise inteligente de ocorrências policiais, utilizando IA para identificar padrões criminais.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
