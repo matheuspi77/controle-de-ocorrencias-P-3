@@ -115,7 +115,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
         
         <div className="text-center mt-1">
           <span className="text-sm font-black tracking-widest uppercase block text-[#ffd700]">43° BPM</span>
-          <span className="text-[10px] font-bold tracking-tight uppercase text-white/40 leading-none">POLÍCIA MILITAR DO MA</span>
+          <span className="text-[10px] font-bold tracking-tight uppercase text-white/40 leading-none">POLÍCIA MILITAR DO MARANHÃO</span>
         </div>
       </div>
       
