@@ -73,5 +73,49 @@ const app = initializeApp(firebaseConfig);
 <script type="module">
   console.log("Firebase carregado:", db);
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // Configuração do Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7hl8nSkkHuRtEudVjW6MieJDdSBGy_wU",
+    authDomain: "controle-de-ocorrencias-p-3.firebaseapp.com",
+    projectId: "controle-de-ocorrencias-p-3",
+    storageBucket: "controle-de-ocorrencias-p-3.firebasestorage.app",
+    messagingSenderId: "1074090746654",
+    appId: "1:1074090746654:web:e459b57dc391167b5b9f0f"
+  };
+
+  // Inicializa Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // TESTE: Salvar um documento
+  async function salvarTeste() {
+    try {
+      const docRef = await addDoc(collection(db, "usuarios"), {
+        nome: "João",
+        mensagem: "Olá mundo",
+        criadoEm: new Date()
+      });
+      console.log("Documento salvo com ID:", docRef.id);
+    } catch (e) {
+      console.error("Erro ao salvar documento:", e);
+    }
+  }
+
+  // TESTE: Ler todos os documentos
+  async function lerTeste() {
+    const querySnapshot = await getDocs(collection(db, "usuarios"));
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, doc.data());
+    });
+  }
+
+  // Executa os testes
+  salvarTeste();
+  lerTeste();
+</script>
 </body>
 </html>
