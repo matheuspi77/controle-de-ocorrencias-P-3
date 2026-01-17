@@ -116,5 +116,24 @@ const app = initializeApp(firebaseConfig);
   salvarTeste();
   lerTeste();
 </script>
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyD7hl8nSkkHuRtEudVjW6MieJDdSBGy_wU",
+    authDomain: "controle-de-ocorrencias-p-3.firebaseapp.com",
+    projectId: "controle-de-ocorrencias-p-3",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // 🔥 TORNA GLOBAL (ESSENCIAL)
+  window.db = db;
+
+  console.log("Firebase inicializado OK", db);
+</script>
 </body>
 </html>
